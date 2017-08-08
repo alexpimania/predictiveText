@@ -53,12 +53,17 @@ def makePrediction(text, tweets):
   return prediction
   
 def predictionLoop():
+  import sys
   tweets = getTweets()
   print("Press control-C to escape loop")
-  while True:     
-    text = input("Enter some text: ").lower()
-    prediction = makePrediction(text, tweets)
-    print(text + prediction)
+  try:
+    while True:     
+     text = input("Enter some text: ").lower()
+     prediction = makePrediction(text, tweets)
+     print(text + prediction)
+  except KeyboardInterrupt:
+    print()
+    sys.exit()
 
     
 predictionLoop()
