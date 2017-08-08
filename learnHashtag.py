@@ -34,18 +34,15 @@ def getTweets():
     tweetText = removeText(tweet._json["full_text"]).lower().strip()
     tweetText = "".join([item for item in list(tweetText) if item not in list(string.punctuation + "#!()-$@/'?")])
     tweets.append(tweetText)
-  return tweetText
-
- 
-def getNgrams():
-  import nltk
-  tweets = getTweets()
-  for tweet in tweets:
-    
+  return [hashtag, tweetText]
 
 
-def savePredictionData():
-  pass
+def saveTweets():
+  import json
+  hashtag, tweets = getTweets()
+  outputJson = json.dumps(outputFile)
+  with open(hashtag + "Tweets.json", "w") as outputFile:
+    outputFile.write(outputJson)
   
 
-  
+  saveTweets()
