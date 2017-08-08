@@ -1,5 +1,5 @@
 {
-  "tweetCount": 1000,
+  "tweetCount": 6000,
   "twitterKeys":[  
     "DPlfTbOxG4JQnCwzToA1ziZed",
     "8iCheezbWrRUiFCRLGI3qtUMLVjhG20xuYupn5owiHMphBME4y",
@@ -7,5 +7,5 @@
     "QfULhyv1bmdb3B3zEz9Sg5tldChKbdRla9eMBEIPu2epx"
   ],
   "predictionDepth": 2,
-  "predictionLength": 3
+  "predictionLength": 6
 }
