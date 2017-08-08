@@ -38,7 +38,10 @@ def getTweets():
 
  
 def getNgrams():
-  pass
+  import nltk
+  tweets = getTweets()
+  for tweet in tweets:
+    
 
 
 def savePredictionData():
