@@ -20,6 +20,21 @@ def getHashtag():
   return hashtag.replace("#", "")
 
 
+def stripAllEntities(text):
+  import string
+  entity_prefixes = ['@','#']
+  for separator in  string.punctuation:
+    if separator not in entity_prefixes :
+      text = text.replace(separator,' ')
+  words = []
+  for word in text.split():
+    word = word.strip()
+    if word:
+      if word[0] not in entity_prefixes:
+        words.append(word)
+  return ' '.join(words)
+
+
 def initTwitterApi():
   config = getConfig()
   import tweepy
@@ -41,6 +56,7 @@ def getTweets():
   for tweet in search.items(tweetCount):
     tweetText = removeText(tweet._json["full_text"]).lower().strip()
     tweetText = "".join([item for item in list(tweetText) if item not in list(string.punctuation.replace("'", "") + "#!()-$@/?")])
+    tweetText = stripAllEntities(tweetText)
     tweets.append(tweetText)
   return [hashtag, tweets]
 
@@ -48,6 +64,7 @@ def getTweets():
 def saveTweets():
   import json
   hashtag, tweets = getTweets()
+  print("Tweet count: " + str(len(tweets)))
   outputJson = json.dumps(tweets)
   with open(hashtag + "Tweets.json", "w") as outputFile:
     outputFile.write(outputJson)
