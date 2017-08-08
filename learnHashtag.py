@@ -63,11 +63,14 @@ def getTweets():
 
 def saveTweets():
   import json
+  import os
   hashtag, tweets = getTweets()
+  if not os.path.exists("./hashtagTweets"):
+    os.makedirs("./hashtagTweets")
   print("Tweet count: " + str(len(tweets)))
   outputJson = json.dumps(tweets)
-  with open(hashtag + "Tweets.json", "w") as outputFile:
+  with open("./hashtagTweets/" + hashtag + "Tweets.json", "w") as outputFile:
     outputFile.write(outputJson)
   
-
-saveTweets()
+if __name__ == "__main__":
+  saveTweets()
