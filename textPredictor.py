@@ -6,13 +6,13 @@ def getConfig():
 
 def weightedRandomByDict(dct):
   import random
-  randVal = random.random() * sum(list(dct.keys()))
+  randValue = random.random() * sum(list(dct.values()))
   total = 0
   for key, value in dct.items():
     total += value
-    if ranValue <= total:
+    if randValue <= total:
       return key
-  assert False, 'unreachable'
+  return ""
     
     
 def getHashtag():
@@ -39,26 +39,26 @@ def makePrediction(text, tweets):
   predictions = {}
   predictionDepth = config["predictionDepth"]
   predictionLength = config["predictionLength"]
-  predictionBase = text.split()[-predictionDepth:]
+  predictionBase = " ".join(text.split()[-predictionDepth:])
   for tweet in tweets:
     if predictionBase in tweet:
       indexes = [m.start() + len(predictionBase) for m in re.finditer(predictionBase, tweet)]
-      for index in index:
-        prediction = tweet[index:].split()[:predictionLength - 1]
+      for index in indexes:
+        prediction = " ".join(tweet[index:].split()[:predictionLength - 1])
         if prediction in predictions:
           predictions[prediction] += 1
         else:
           predictions[prediction] = 1
-  prediction = " ".join(weightedRandomByDict(predictions))
+  prediction = weightedRandomByDict(predictions)
   return prediction
   
 def predictionLoop():
   tweets = getTweets()
   print("Press control-C to escape loop")
   while True:     
-    text = input("Enter some text: ")
+    text = input("Enter some text: ").lower()
     prediction = makePrediction(text, tweets)
-    print(text + " " prediction)
+    print(text + " " + prediction)
 
     
 predictionLoop()
