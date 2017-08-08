@@ -44,7 +44,7 @@ def makePrediction(text, tweets):
     if predictionBase in tweet:
       indexes = [m.start() + len(predictionBase) for m in re.finditer(predictionBase, tweet)]
       for index in indexes:
-        prediction = " ".join(tweet[index:].split()[:predictionLength - 1])
+        prediction = " ".join(tweet[index:].split()[:predictionLength])
         if prediction in predictions:
           predictions[prediction] += 1
         else:
@@ -58,7 +58,7 @@ def predictionLoop():
   while True:     
     text = input("Enter some text: ").lower()
     prediction = makePrediction(text, tweets)
-    print(text + " " + prediction)
+    print(text + prediction)
 
     
 predictionLoop()
