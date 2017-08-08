@@ -45,6 +45,8 @@ def makePrediction(text, tweets):
       indexes = [m.start() + len(predictionBase) for m in re.finditer(predictionBase, tweet)]
       for index in indexes:
         prediction = " ".join(tweet[index:].split()[:predictionLength])
+        if not prediction.startswith(" "):
+          prediction = " " + prediction if tweet[index:].startswith(" ") else prediction
         if prediction in predictions:
           predictions[prediction] += 1
         else:
@@ -52,10 +54,11 @@ def makePrediction(text, tweets):
   prediction = weightedRandomByDict(predictions)
   return prediction
   
+  
 def predictionLoop():
   import sys
   tweets = getTweets()
-  print("Press control-C to escape loop")
+  print("Press ctrl-C to escape loop")
   try:
     while True:     
      text = input("Enter some text: ").lower()
