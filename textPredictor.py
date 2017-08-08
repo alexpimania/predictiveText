@@ -26,7 +26,7 @@ def getTweets():
   import sys
   hashtag = getHashtag()
   try:
-    tweets = json.loads(open(hashtag + "Tweets.json").read())
+    tweets = json.loads(open("./hashtagTweets/" + hashtag + "Tweets.json").read())
   except: 
     print("No tweet database for this hashtag :/")
     sys.exit()
@@ -68,5 +68,5 @@ def predictionLoop():
     print()
     sys.exit()
 
-    
-predictionLoop()
+if __name__ == "__main__": 
+  predictionLoop()
