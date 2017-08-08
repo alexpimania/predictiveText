@@ -55,8 +55,8 @@ def getTweets():
   search = tweepy.Cursor(api.search, q="#" + hashtag, tweet_mode="extended", lang="en")
   for tweet in search.items(tweetCount):
     tweetText = removeText(tweet._json["full_text"]).lower().strip()
-    tweetText = "".join([item for item in list(tweetText) if item not in list(string.punctuation.replace("'", "") + "#!()-$@/?")])
     tweetText = stripAllEntities(tweetText)
+    tweetText = "".join([item for item in list(tweetText) if item not in list(string.punctuation.replace("'", "") + "#!()-$@/?")])
     tweets.append(tweetText)
   return [hashtag, tweets]
 
